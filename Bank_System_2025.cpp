@@ -16,60 +16,7 @@
 #include"FileManager.h"
 using namespace std;
 
-void clientMenu(Client& client1, Client& client2) {
-    try {
-        int option;
-        cout << "Select an operation:\n"
-            << "1. Transfer within your own account (EGP to USD or USD to EGP)\n"
-            << "2. Transfer to another client (EGP or USD)\n";
-        cin >> option;
-        client1.checkBalance();
-        if (option == 1) {
 
-            string fromCurrency, toCurrency;
-            double amount;
-
-            cout << "Enter the amount to transfer: ";
-            cin >> amount;
-            cout << "Enter the source currency (EGP/USD): ";
-            cin >> fromCurrency;
-            cout << "Enter the target currency (EGP/USD): ";
-            cin >> toCurrency;
-            cout << client1.getName() << ", the operation." << endl;
-            client1.transferCurrency(client1, amount, fromCurrency, toCurrency);
-            client1.checkBalance();
-        }
-        else if (option == 2) {
-            int recipientId;
-            string currency;
-            double amount;
-
-            cout << "Enter the recipient client ID (1 or 2): ";
-            cin >> recipientId;
-
-            cout << "Enter the amount to transfer: ";
-            cin >> amount;
-            cout << "Enter the currency (EGP/USD): ";
-            cin >> currency;
-
-            if (recipientId == client2.getId()) {
-                client1.transferTo(client2, amount, currency);
-            }
-            else {
-                throw invalid_argument("Invalid recipient ID.");
-            }
-
-            client1.checkBalance();
-            client2.checkBalance();
-        }
-        else {
-            cout << "Invalid option selected.\n";
-        }
-    }
-    catch (const exception& e) {
-        cerr << "Error: " << e.what() << endl;
-    }
-}
 
 int main()
 {
