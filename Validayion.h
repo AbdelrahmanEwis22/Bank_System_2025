@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <cctype>
 #include <iostream>
 using namespace std;
@@ -11,7 +11,7 @@ public:
             return false;
         for (char c : name)
         {
-            if (!isalpha(c))
+            if (!isalpha(c) && c != ' ')
                 return false;
         }
         return true;
@@ -19,8 +19,24 @@ public:
 
     static bool validatePassword(string password)
     {
-        return (password.length() >= 8 && password.length() <= 20);
+       // cout << "Checking password: " << password << endl; // Debugging
+
+        if (password.length() < 8 || password.length() > 20)
+            return false; 
+
+        bool hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
+        string specialChars = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
+
+        for (char c : password) {
+            if (isupper(c)) hasUpper = true;
+            if (islower(c)) hasLower = true;
+            if (isdigit(c)) hasDigit = true;
+            if (specialChars.find(c) != string::npos) hasSpecial = true;
+        }
+
+        return hasUpper && hasLower && hasDigit && hasSpecial; // الآن الرموز مسموحة
     }
+
 
     static bool validateBalance(double balance)
     {

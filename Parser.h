@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -28,7 +28,7 @@ class Parser
 //        return tokens;
 //    }
 public:
-    //static string trim(const string& str) {
+    //static string trim( string& str) {
     //    size_t first = str.find_first_not_of(" \t");
     //    if (first == string::npos) return ""; // ??? ???? ??????? ???? ??????
     //    size_t last = str.find_last_not_of(" \t");
@@ -44,12 +44,9 @@ public:
         return tokens;
     }
 
-    static Client parseToClient(string line) {
+    static Client parseToClient(string line) { 
         vector<string> data = split(line, ',');
-        if (data.size() != 5) {
-            throw runtime_error("Invalid client data format.");
-        }
-        Client  client;
+        Client client;
         client.setId(stoi(data[0]));
         client.setName(data[1]);
         client.setPassword(data[2]);
@@ -60,9 +57,6 @@ public:
 
     static Employee parseToEmployee(string line) {
         vector<string> data = split(line, ',');
-        if (data.size() != 4) {
-            throw runtime_error("Invalid employee data format.");
-        }
         Employee  employee;
         employee.setId(stoi(data[0]));
         employee.setName(data[1]);
@@ -73,9 +67,6 @@ public:
 
     static Admin parseToAdmin(string line) {
         vector<string> data = split(line, ',');
-        if (data.size() != 4) {
-            throw runtime_error("Invalid admin data format.");
-        }
         Admin  admin;
         admin.setId(stoi(data[0]));
         admin.setName(data[1]);

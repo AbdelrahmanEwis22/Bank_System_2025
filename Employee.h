@@ -1,16 +1,12 @@
 #pragma once
-
-#include <iostream>
-#include <vector>
 #include <string>
 #include <algorithm>
 #include <ctime>
 #include <sstream>
 #include <iomanip>
 #include<fstream>
-#include <sstream>
 #include"Client.h" 
-#include"Person.h"
+#include"iterator"
 using namespace std;
 class Employee :public Person
 {
@@ -20,7 +16,10 @@ protected:
 public:
     // Constructor
     Employee() {
-        this->salary;
+        this->id = 0;
+        this->name = " ";
+        this->password = " ";
+        this->salary=0.0;
     }
     Employee(int id, string name, string password, double salary)
         : Person(id, name, password)
@@ -74,6 +73,7 @@ public:
         cout << "ID: " << id << "\nName: " << name
             << "\nSalary: " << salary << endl;
     }
+    
 };
 static vector<Employee>allEmployees;
 static vector<Employee>::iterator elIt;

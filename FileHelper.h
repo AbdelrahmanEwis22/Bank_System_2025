@@ -10,10 +10,22 @@
 
 using namespace std;
 //#include"Parser.h"
-class FilesHelper {
-private:
+class FileHelper {
+//private:
+//    static void saveLast(string fileName, int id) {
+//        fstream file(fileName, ios::out);
+//        if (file.is_open()) {
+//            file << id;
+//            file.close();
+//        }
+//        else {
+//            throw runtime_error("Could not open " + fileName + " for writing.");
+//        }
+//    }
+public:
+    // ???? ???????? ??? ID ?? ?????
     static void saveLast(string fileName, int id) {
-        fstream file(fileName, ios::out);
+        ofstream file(fileName);
         if (file.is_open()) {
             file << id;
             file.close();
@@ -22,10 +34,8 @@ private:
             throw runtime_error("Could not open " + fileName + " for writing.");
         }
     }
-public:
-    // ???? ???????? ??? ID ?? ?????
     static int getLast(string fileName) {
-        fstream file(fileName, ios::in);
+        ifstream file(fileName);
         int lastId = 0;
         if (file.is_open()) {
             file >> lastId;
@@ -38,11 +48,10 @@ public:
     }
     static void saveClient(Client c) {
         int id = getLast("ClientLastId.txt");
-        fstream file("client.txt", ios::app);
+        ofstream file("Clients.txt", ios::app);
         if (file.is_open()) {
             file
                 << id + 1 << ","
-                << c.getId() << ","
                 << c.getName() << ","
                 << c.getPassword() << ","
                 << c.getBalanceEGP() << ","
@@ -60,7 +69,6 @@ public:
         if (file.is_open()) {
             file
                 << id + 1 << ","
-                << e.getId() << ","
                 << e.getName() << ","
                 << e.getPassword() << ","
                 << e.getSalary() << endl;
@@ -76,10 +84,9 @@ public:
         fstream file("Admins.txt", ios::app);
         if (file.is_open()) {
             file
-                << id + 1 << ","
-                << a.getId() << ","
-                << a.getName() << ","
-                << a.getPassword() << ","
+                << id + 1 << ','
+                << a.getName() << ','
+                << a.getPassword() << ','
                 << a.getSalary() << endl;
             file.close();
             saveLast("AdminsLastId.txt", id + 1);
@@ -90,8 +97,9 @@ public:
     }
 
     static void getClients() {
+        //vector<Client> clients; 
         ifstream File1;
-        File1.open("Client.txt");
+        File1.open("Clients.txt");
         if (File1.is_open())
         {
             string line;
@@ -117,6 +125,7 @@ public:
         {
             string line;
             while (getline(File2, line))
+                
             {
                 try
                 {
@@ -125,7 +134,7 @@ public:
                 }
                 catch (const exception& e)
                 {
-                    cout << "Error parsing client: " << e.what() << endl;
+                    cout << "Error parsing Employee: " << e.what() << endl;
                 }
             }File2.close();
         }
@@ -146,7 +155,7 @@ public:
                 }
                 catch (const exception& e)
                 {
-                    cout << "Error parsing client: " << e.what() << endl;
+                    cout << "Error parsing Admin: " << e.what() << endl;
                 }
             }File3.close();
         }
@@ -158,9 +167,8 @@ public:
     static void clearFile(string fileName, string lastIdFile) {
         fstream File, File2;
         File.open(fileName, ios::out | ios::trunc);
-        File.is_open();
         File.close();
-        File2.open(lastIdFile, ios::out || ios::trunc);
+        File2.open(lastIdFile, ios::out | ios::trunc);
         File2 << 0;
         File2.close();
     }
