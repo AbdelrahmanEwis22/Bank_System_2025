@@ -21,16 +21,20 @@
 using namespace std;
 class FileManager :public DataSourceInterface
 {
+
 public:
     //AddFiles
     void addClient(Client client) {
         FileHelper::saveClient(client);
+        cout << "Done addClient..\n ";
     }
     void addEmployee(Employee employee) {
         FileHelper::saveEmployee(employee);
+        cout << "Done addEmployee..\n ";
     }
     void addAdmin(Admin admin) {
         FileHelper::saveAdmin(admin);
+        cout << "Done addAdmin..\n ";
     }
     //RemoveAllFiles
     void removeAllClients() {
@@ -43,10 +47,14 @@ public:
         FileHelper::clearFile("Admins.txt", "AdminLastId.txt");
     }
     //GetAllFiles
-    vector<Client> getAllClients() { 
-        FileHelper::getClients(); 
-        return allClients; 
+    vector<Client> getAllClients() {
+        allClients = FileHelper::getClients(); 
+
+        //cout << " Debug: Loaded " << allClients.size() << " clients in getAllClients().\n";
+
+        return allClients;
     }
+
     vector<Employee> getAllEmployees() {
         FileHelper::getEmployee();
         return allEmployees;

@@ -47,31 +47,28 @@ public:
         system("cls");
     }
 
-    // عرض اسم البنك
     static void bankName() {
         cout << "===================================\n";
         cout << "       National Bank of Egypt      \n";
         cout << "===================================\n";
     }
 
-    // عرض شاشة الترحيب مع التأخير
+   
     static void welcomeWithDelay() {
-        showSplashScreen(); // عرض رسالة الترحيب
+        showSplashScreen(); 
         bankName();
         cout << "Welcome to the Banking System!\n";
         cout << "Loading...\n";
-        this_thread::sleep_for(std::chrono::seconds(3)); // تأخير لمدة 3 ثواني 
-        clearScreen(); // مسح الشاشة بعد انتهاء التأخير
+        this_thread::sleep_for(std::chrono::seconds(3)); 
+        clearScreen(); 
     }
 
-    // مسح الشاشة
     static void clearScreen() {
         #ifdef _WIN32
-            system("cls"); // لنظام ويندوز
+            system("cls"); 
         #endif
     }
 
-    // عرض خيارات تسجيل الدخول
     static void loginOptions() {
         cout << "\n=== Login Options ===\n";
         cout << "1. Login as Client\n";
@@ -80,7 +77,6 @@ public:
         cout << "4. Exit\n";
     }
 
-    // اختيار نوع المستخدم لتسجيل الدخول
     static int loginAs() {
         int choice;
         cout << "Enter your choice: ";
@@ -88,17 +84,14 @@ public:
         return choice;
     }
 
-    // رسالة خطأ عند اختيار غير صحيح
     static void invalid(int c) {
         cout << "Invalid choice: " << c << ". Please try again.\n";
     }
 
-    // رسالة تسجيل الخروج
     static void logout() {
         cout << "Logging out...\n";
     }
 
-    // شاشة تسجيل الدخول
     static void loginScreen(int c) {
         int id;
         string password;
@@ -109,10 +102,10 @@ public:
         cin >> password;
 
         switch (c) {
-        case 1: { // تسجيل دخول كعميل
+        case 1: {
             Client* client = ClientManger::login(id, password);
             if (client) {
-                clearScreen(); // مسح الشاشة قبل عرض قائمة العميل
+                clearScreen();
                 ClientManger::clientOptions(client);
                 delete client;
             }
@@ -142,7 +135,6 @@ public:
         }
     }
 
-    // تشغيل التطبيق
     static void runApp() {
         welcomeWithDelay();
         int choice;
@@ -151,7 +143,7 @@ public:
             choice = loginAs();
             if (choice == 4) {
                 logout();
-                exit(0);  // إنهاء البرنامج مباشرة
+                exit(0);  
             }
             if (choice >= 1 && choice <= 3) {
                 clearScreen();

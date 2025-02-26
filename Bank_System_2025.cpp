@@ -20,27 +20,55 @@ using namespace std;
 
 int main()
 {
+    /*FileManager fileManager;
+    vector<Client> clients = fileManager.getAllClients();
+
+    if (clients.empty()) {
+        cout << " No clients found in system!\n";
+    }
+    else {
+        cout << " Clients loaded successfully:\n";
+        for ( auto& client : clients) {
+            cout << "Client ID: " << client.getId()
+                << "  \nName: " << client.getName()
+                << "  \nBalance: " << client.getBalanceEGP() << " EGP, "
+                << client.getBalanceUSD() << " USD\n";
+        }
+    }*/
+
     FileManager f;
-  //  f.updateClients();
-    FileHelper s;
-    s.getClients();
-    s.getLast("ClientLastId.txt");
-   // f.removeAllClients();
-     /*Client a(1, "Mohamed Ewis", "Omar_2024", 25000,10000); 
-    f.addClient(a);*/
-    //f.removeAllEmployees();
-    Employee c(1, "Omar Ewis", "Ewis_2025", 10000);
-   cout << "done1\n";
-   f.getAllClients();
-   f.getAllAdmins();
+    Client c;
+    c.display();
+   // /*FileHelper c;
+   // Client a(1, "Omar Ewis", "Omar_2021", 10000, 5000);
+   // c.saveClient(a);*/
+   //// f.removeAllAdmins();
+   // f.getAllClients(); // استرجاع العملاء
+   // f.getAllEmployees();
+   // Employee e;
+   // e.listClients();
+   // f.getAllAdmins(); 
    
-    f.getAllEmployees();
-    cout << "done2\n";
-    f.addEmployee(c);
-   // f.updateClients()
-    cout << "done3\n";
-        f.getAllEmployees();
-        cout << "done4\n";
+  //  FileManager f;
+  ////  f.updateClients();
+  //  FileHelper s;
+  // 
+  // // f.removeAllClients();
+  //   Client a(1, "Mohamed Ewis", "Omar_2023", 25000,10000); 
+  //  f.addClient(a);
+  //  //f.removeAllEmployees();
+  //  Employee c(1, "Omar Ewis", "Ewis_2025", 10000);
+  // cout << "done1\n";
+  // f.getAllClients();
+  // f.getAllAdmins();
+  // 
+  //  f.getAllEmployees();
+  //  cout << "done2\n";
+  //  f.addEmployee(c);
+  // // f.updateClients()
+  //  cout << "done3\n";
+  //      f.getAllEmployees();
+  //      cout << "done4\n";
    //f.addAdmin(a); 
    // f.getAllAdmins();
    // FileManager f;
@@ -54,7 +82,7 @@ int main()
     f.getAllAdmins();
     cout << "\n";
     f.getAllClients();*/
-    //Screens::runApp();
+   //Screens::runApp();
     /*ofstream file("C:\\Users\\ewisa\\OneDrive\\Desktop\\Bank_System_2025\\AdminsLastId.txt", ios::app);
     if (!file) {
         cerr << "Failed to create Clients.txt!" << endl;

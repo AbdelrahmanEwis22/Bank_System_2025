@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Parser.h"
 #include <iostream>
 #include <sstream>
@@ -96,28 +96,34 @@ public:
         }
     }
 
-    static void getClients() {
-        //vector<Client> clients; 
-        ifstream File1;
-        File1.open("Clients.txt");
-        if (File1.is_open())
-        {
-            string line;
-            while (getline(File1, line))
-            {
-                try
-                {
-                    Client client = Parser::parseToClient(line);
-                    allClients.push_back(client);
-                }
-                catch (const exception& e)
-                {
-                    cout << "Error parsing client: " << e.what() << endl;
-                }
-            }File1.close();
+    static vector<Client> getClients() {
+        vector<Client> clients; // إنشاء قائمة العملاء
+        ifstream File1("Clients.txt");
+
+        //if (!File1) {
+        //    cout << " Warning: Clients.txt file not found!\n";
+        //    return clients; 
+        //} 
+
+        string line;  
+        while (getline(File1, line)) {
+            try {
+               // cout << " Reading line: " << line << endl; // 
+                Client client = Parser::parseToClient(line);
+                clients.push_back(client);
+               // cout << " Client added: " << client.getName() << endl; //
+
+            }
+            catch (const exception& e) {
+                cout << " Error parsing client: " << e.what() << endl;
+            }
         }
-        else throw runtime_error("Could not open file client.txt for reading. ");
+
+        File1.close();
+       // cout << " Loaded " << clients.size() << " clients from file.\n";
+        return clients;
     }
+
     static void getEmployee() {
         ifstream File2;
         File2.open("Employees.txt");
@@ -131,6 +137,7 @@ public:
                 {
                     Employee employee = Parser::parseToEmployee(line);
                     allEmployees.push_back(employee);
+
                 }
                 catch (const exception& e)
                 {
@@ -140,9 +147,9 @@ public:
         }
         else throw runtime_error("Could not open file client.txt for reading. ");
     }
-    static void getAdmin() {
-        ifstream File3;
-        File3.open("Admins.txt");
+    static vector<Admin> getAdmin() { 
+        vector<Admin> admins;
+        ifstream File3("Admins.txt");
         if (File3.is_open())
         {
             string line;
@@ -151,13 +158,16 @@ public:
                 try
                 {
                     Admin admin = Parser::parseToAdmin(line);
-                    allAdmins.push_back(admin);
+                    admins.push_back(admin);
+                    cout << " Admin added: " << admin.getName() << endl; // ✅ التأكد أن العميل أُضيف
+
                 }
                 catch (const exception& e)
                 {
                     cout << "Error parsing Admin: " << e.what() << endl;
                 }
             }File3.close();
+            return admins;
         }
         else throw runtime_error("Could not open file client.txt for reading. ");
     }

@@ -34,8 +34,7 @@ public:
             cout << "Enter client ID: ";
             cin >> id;
 
-            // تحقق من ID غير مكرر
-            vector<Client> allClients = fileManager.getAllClients();  // افترضنا أن هناك دالة لإرجاع كل العملاء 
+            vector<Client> allClients = fileManager.getAllClients();  
             for (auto& c : allClients) {
                 if (c.getId() == id) {
                     throw invalid_argument("Client ID already exists!");
@@ -64,7 +63,6 @@ public:
             newClient.setBalanceEGP(balanceEGP); 
             newClient.setBalanceUSD(balanceUSD); 
 
-            // إضافة العميل
             fileManager.addClient(newClient);  
             cout << "Client added successfully.\n";
         }
@@ -73,7 +71,6 @@ public:
         cout << "Enter client ID to display: ";
         cin >> clientId;
 
-        // البحث عن العميل باستخدام `searchClient`
         Client* client = employee->searchClient(clientId);
 
         if (client) {
@@ -87,7 +84,7 @@ public:
     static void listAllClients(Employee* employee) {
         
             FileManager fileManager;
-            vector<Client> clients = fileManager.getAllClients();  // استدعاء الدالة من كائن fileManager
+            vector<Client> clients = fileManager.getAllClients();  
             cout << "\n=== Client List ===\n";
 
             if (clients.empty()) {
@@ -96,7 +93,7 @@ public:
             else {
                 for (auto& client : clients) {
                     client.display();
-                    cout << "----------------------\n";  // إضافة فاصل بين كل عميل وآخر
+                    cout << "----------------------\n";  
                 }
             }
         } 
@@ -105,7 +102,6 @@ public:
             cout << "Enter client ID to search: ";
             cin >> clientId; 
 
-            // البحث عن العميل باستخدام دالة searchClient
             Client* client = employee->searchClient(clientId);  
 
             if (client) { 
@@ -129,13 +125,12 @@ public:
             cout << "Enter client ID to edit: ";
             cin >> clientId;
 
-            // الحصول على العميل بناءً على ID
             vector<Client> clients = fileManager1.getAllClients();
             Client* clientToEdit = nullptr;
 
             for (auto& client : clients) {
                 if (client.getId() == clientId) {
-                    clientToEdit = &client;  // نستخدم العنوان مباشرة
+                    clientToEdit = &client;  
                     break;
                 }
             }
@@ -187,8 +182,7 @@ public:
                     cout << "Invalid choice!\n";
                 }
 
-                // تحديث العملاء في الملف بعد التعديل
-                fileManager.updateClients();  // تقوم هذه الدالة بتحديث العملاء في الملف
+                fileManager.updateClients();  
                 cout << "Client information updated successfully.\n";
             }
             else {
